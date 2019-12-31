@@ -1,0 +1,13 @@
+Package: COMIX
+Type: Package
+Title: Coarsened Mixtures of Hierarchical Skew Kernels
+Version: 0.1.0
+Author: S. Gorsky, C. Chan, L. Ma
+Maintainer: S. Gorsky <s.gorsky@duke.edu>
+Description: Bayesian fit of a Dirichlet Process Mixture with hierarchical multivariate skew normal kernels and coarsened posteriors.
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Imports: Rcpp (>= 0.12.18)
+LinkingTo: Rcpp, RcppArmadillo, RcppEigen, RcppNumerical
+RoxygenNote: 6.1.1

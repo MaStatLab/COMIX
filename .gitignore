@@ -1,0 +1,7 @@
+*.o
+*.so
+.Rhistory
+.Rproj.user
+*.Rproj
+.RData
+.Rhistory
