@@ -277,7 +277,9 @@ Rcpp::List PMC::initialParticles( arma::uvec T ) {
     mat E_k(num_particles, pow(p,2));
     // uvec S_k(num_particles);
 
-    if( n_k > 0 ) {
+    if( n_k > p + 2 ) {
+    // if( n_k > 0 ) {
+    
       // This is clumsy, but apparently reuiqred for reproducibility,
       // when initializing with randn<mat>(num_particles, n_k) results 
       // are not consistent across platforms. 
@@ -326,13 +328,13 @@ Rcpp::List PMC::initialParticles( arma::uvec T ) {
         mat e;
         int nG;
         // if ( n_k > (uint)p + 2 ) {
-        if ( n_k > p + 2 ) {
+        // if ( n_k > p + 2 ) {
           e = ( Y_k.each_row() - xi_0k.row(iN) );
           nG = n_k; 
-        } else {
-          e = ( Y.each_row() - xi_0k.row(iN) );
-          nG = T.n_elem;
-        }
+        // } else {
+          // e = ( Y.each_row() - xi_0k.row(iN) );
+          // nG = T.n_elem;
+        // }
         e -= ( repmat(psi_k.row(iN), nG, 1) % repmat(abs(z_k.row(iN).t()), 1, p) );
         mat Gsum(p, p);
         Gsum.fill(0);
