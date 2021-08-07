@@ -1,7 +1,9 @@
-calibrate <- function(x)
+calibrate <- function(x, reference.group = NULL)
 {
   C = x$data$C - 1
   Z = x$chain$t - 1
+  ref = ifelse(is.null(reference.group), -1, reference.group - 1 )
+  
   if (!is.matrix(Z)) Z=matrix(Z, ncol=1)
   ns  = dim(x$chain$xi0)[3]
   K = dim(x$chain$xi0)[2]
@@ -10,16 +12,19 @@ calibrate <- function(x)
                  matrix(C,ncol=1),
                  Z,
                  x$chain$xi, dim(x$chain$xi),
-                 x$chain$xi0, dim(x$chain$xi0) )
+                 x$chain$xi0, dim(x$chain$xi0),
+                 ref)
   colnames(output$Y_cal) = colnames(x$data$Y)
   return(output)
 
 }
 
-calibrateNoDist <- function(x)
+calibrateNoDist <- function(x, reference.group = NULL)
 {
   C = x$data$C - 1
   Z = x$chain$t - 1
+  ref = ifelse(is.null(reference.group), -1, reference.group - 1 )
+  
   if (!is.matrix(Z)) Z=matrix(Z, ncol=1)
   ns  = dim(x$chain$xi0)[3]
   K = dim(x$chain$xi0)[2]
@@ -28,7 +33,8 @@ calibrateNoDist <- function(x)
                  matrix(C,ncol=1),
                  Z,
                  x$chain$xi, dim(x$chain$xi),
-                 x$chain$xi0, dim(x$chain$xi0) )
+                 x$chain$xi0, dim(x$chain$xi0),
+                 ref)
   colnames(output$Y_cal) = colnames(x$data$Y)
   return(output)
   

@@ -19,8 +19,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // calib
-Rcpp::List calib(arma::mat Y, arma::vec C, arma::mat Z, NumericVector mu_input, IntegerVector mu_dim, NumericVector mu0_input, IntegerVector mu0_dim);
-RcppExport SEXP _COMIX_calib(SEXP YSEXP, SEXP CSEXP, SEXP ZSEXP, SEXP mu_inputSEXP, SEXP mu_dimSEXP, SEXP mu0_inputSEXP, SEXP mu0_dimSEXP) {
+Rcpp::List calib(arma::mat Y, arma::vec C, arma::mat Z, NumericVector mu_input, IntegerVector mu_dim, NumericVector mu0_input, IntegerVector mu0_dim, int ref);
+RcppExport SEXP _COMIX_calib(SEXP YSEXP, SEXP CSEXP, SEXP ZSEXP, SEXP mu_inputSEXP, SEXP mu_dimSEXP, SEXP mu0_inputSEXP, SEXP mu0_dimSEXP, SEXP refSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -31,13 +31,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< IntegerVector >::type mu_dim(mu_dimSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type mu0_input(mu0_inputSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type mu0_dim(mu0_dimSEXP);
-    rcpp_result_gen = Rcpp::wrap(calib(Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim));
+    Rcpp::traits::input_parameter< int >::type ref(refSEXP);
+    rcpp_result_gen = Rcpp::wrap(calib(Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim, ref));
     return rcpp_result_gen;
 END_RCPP
 }
 // calibNoDist
-Rcpp::List calibNoDist(arma::mat Y, arma::vec C, arma::mat Z, NumericVector mu_input, IntegerVector mu_dim, NumericVector mu0_input, IntegerVector mu0_dim);
-RcppExport SEXP _COMIX_calibNoDist(SEXP YSEXP, SEXP CSEXP, SEXP ZSEXP, SEXP mu_inputSEXP, SEXP mu_dimSEXP, SEXP mu0_inputSEXP, SEXP mu0_dimSEXP) {
+Rcpp::List calibNoDist(arma::mat Y, arma::vec C, arma::mat Z, NumericVector mu_input, IntegerVector mu_dim, NumericVector mu0_input, IntegerVector mu0_dim, int ref);
+RcppExport SEXP _COMIX_calibNoDist(SEXP YSEXP, SEXP CSEXP, SEXP ZSEXP, SEXP mu_inputSEXP, SEXP mu_dimSEXP, SEXP mu0_inputSEXP, SEXP mu0_dimSEXP, SEXP refSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -48,7 +49,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< IntegerVector >::type mu_dim(mu_dimSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type mu0_input(mu0_inputSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type mu0_dim(mu0_dimSEXP);
-    rcpp_result_gen = Rcpp::wrap(calibNoDist(Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim));
+    Rcpp::traits::input_parameter< int >::type ref(refSEXP);
+    rcpp_result_gen = Rcpp::wrap(calibNoDist(Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim, ref));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -99,8 +101,8 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_COMIX_hungarian_cc", (DL_FUNC) &_COMIX_hungarian_cc, 1},
-    {"_COMIX_calib", (DL_FUNC) &_COMIX_calib, 7},
-    {"_COMIX_calibNoDist", (DL_FUNC) &_COMIX_calibNoDist, 7},
+    {"_COMIX_calib", (DL_FUNC) &_COMIX_calib, 8},
+    {"_COMIX_calibNoDist", (DL_FUNC) &_COMIX_calibNoDist, 8},
     {"_COMIX_perturbedSNcpp", (DL_FUNC) &_COMIX_perturbedSNcpp, 7},
     {"_COMIX_KL", (DL_FUNC) &_COMIX_KL, 6},
     {"_COMIX_relabel", (DL_FUNC) &_COMIX_relabel, 1},

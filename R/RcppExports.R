@@ -5,12 +5,12 @@ hungarian_cc <- function(cost) {
     .Call(`_COMIX_hungarian_cc`, cost)
 }
 
-calib <- function(Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim) {
-    .Call(`_COMIX_calib`, Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim)
+calib <- function(Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim, ref) {
+    .Call(`_COMIX_calib`, Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim, ref)
 }
 
-calibNoDist <- function(Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim) {
-    .Call(`_COMIX_calibNoDist`, Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim)
+calibNoDist <- function(Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim, ref) {
+    .Call(`_COMIX_calibNoDist`, Y, C, Z, mu_input, mu_dim, mu0_input, mu0_dim, ref)
 }
 
 perturbedSNcpp <- function(Y, C, prior, pmc, state, initParticles, init) {

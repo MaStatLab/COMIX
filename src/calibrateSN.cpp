@@ -12,7 +12,8 @@ Rcpp::List calib( arma::mat Y,
                   NumericVector mu_input,
                   IntegerVector mu_dim,
                   NumericVector mu0_input,
-                  IntegerVector mu0_dim  )
+                  IntegerVector mu0_dim,
+                  int ref)
 {
   
   arma::cube mu(mu_input.begin(), mu_dim[0], mu_dim[1], mu_dim[2]);
@@ -29,7 +30,11 @@ Rcpp::List calib( arma::mat Y,
   {
     for(int i=0; i<n; i++)
     {
-      calibration.slice(i).row(it) = mu.slice(it).cols(Z(it,i)*p,Z(it,i)*p+p-1).row(C(i)) - mu0.slice(it).col(Z(it,i)).t();
+      // calibration.slice(i).row(it) = mu.slice(it).cols(Z(it,i)*p,Z(it,i)*p+p-1).row(C(i)) - mu0.slice(it).col(Z(it,i)).t();
+      if(ref == -1)
+        calibration.slice(i).row(it) =   mu.slice(it).cols(Z(it,i)*p,Z(it,i)*p+p-1).row(C(i)) - mu0.slice(it).col(Z(it,i)).t();
+      else
+        calibration.slice(i).row(it) =   mu.slice(it).cols(Z(it,i)*p,Z(it,i)*p+p-1).row(C(i)) - mu.slice(it).cols(Z(it,i)*p,Z(it,i)*p+p-1).row(ref);
     }    
   }  
   
@@ -55,7 +60,8 @@ Rcpp::List calibNoDist( arma::mat Y,
                         NumericVector mu_input,
                         IntegerVector mu_dim,
                         NumericVector mu0_input,
-                        IntegerVector mu0_dim  )
+                        IntegerVector mu0_dim,
+                        int ref)
 {
   
   arma::cube mu(mu_input.begin(), mu_dim[0], mu_dim[1], mu_dim[2]);
@@ -70,7 +76,11 @@ Rcpp::List calibNoDist( arma::mat Y,
   
   for(int i=0; i<n; i++) {
     for(int it=0; it<niter; it++) {
-      calibration.row(it) = mu.slice(it).cols(Z(it,i)*p,Z(it,i)*p+p-1).row(C(i)) - mu0.slice(it).col(Z(it,i)).t();
+      // calibration.row(it) = mu.slice(it).cols(Z(it,i)*p,Z(it,i)*p+p-1).row(C(i)) - mu0.slice(it).col(Z(it,i)).t();
+      if(ref == -1)
+        calibration.row(it) =  mu.slice(it).cols(Z(it,i)*p,Z(it,i)*p+p-1).row(C(i)) - mu0.slice(it).col(Z(it,i)).t();
+      else
+        calibration.row(it) =  mu.slice(it).cols(Z(it,i)*p,Z(it,i)*p+p-1).row(C(i)) - mu.slice(it).cols(Z(it,i)*p,Z(it,i)*p+p-1).row(ref);
     }    
     calibrationMedian.row(i) = median(calibration,0);
   }  
